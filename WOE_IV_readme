@@ -1,0 +1,32 @@
+This file contains the detailed explaination of the WOE_IV.py file, where in Weight of Evidence(WOE) and Information Value(IV) have been computed. We have used the Titanic dataset for our calculations. This is a method used to find the Information value of a particular feature.
+The technique is applicable for binary class classification problem.
+
+Steps involved in computation:-
+
+1. Obtain the bins for the independent variable. For a categorical variable each unique category will act as a bin.
+   Whereas in case of a continuous variable decide the number of bins(usually 10 or 20) that are required.
+   We have used the in-built function "cut" of the Pandas library in Python in order to obtain the bins.
+
+2. Obtain the percentage of positive class and negative class in each bin.
+
+3. Calculate the WOE value for each bin. WOE = log(percentage_positives/percentage_negatives).
+
+4. Calculate the IV value for each bin. IV = (percentage_positives - percentage_negatives)*WOE. Here the WOE is the value calculated above for the respective bin.
+
+5. The Information Value for a variable is the sum of all the IV values obtained for each bin.
+
+Deciding the imporatance of the variable basis the IV value.
+
+Range of IV Value 			Importance
+
+<0.02						Not Important
+[0.02, 0.1]					Weak Predictive Power
+[0.1, 0.3)					Medium Predictive Power
+[0.3, 0.5]					Strong Predictive Power
+>0.5						Suspecious Predictive Power
+
+
+Note:- There can be a case where for a particular bin either the number of positives(referred to as Events) or the number of negatives(referred to as non-events) can be 0. In such cases the WOE cannot be calculated due to log function being undefined.
+A possible solution 
+goods = ((positives + 0.5)/total_positives)
+bads = ((negatives + 0.5)/total_negatives)
